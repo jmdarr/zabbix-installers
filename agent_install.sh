@@ -60,8 +60,9 @@ fi
 sed --follow-symlinks -i "s/Server=127\.0\.0\.1/Server=${zbxserver_ip}/g" /etc/zabbix_agentd.conf
 sed --follow-symlinks -i '/# ListenPort/a \ \nListenPort=10050' /etc/zabbix_agentd.conf;
 sed --follow-symlinks -i '/# StartAgents/a \ \nStartAgents=3' /etc/zabbix_agentd.conf;
-sed --follow-symlinks -i "/ServerActive=127\.0\.0\.1/ServerActive=${zbxserver_ip}/g" /etc/zabbix_agentd.conf;
+sed --follow-symlinks -i "s/ServerActive=127\.0\.0\.1/ServerActive=${zbxserver_ip}/g" /etc/zabbix_agentd.conf;
 sed --follow-symlinks -i "s/Hostname=Zabbix server/Hostname=${fqdn}/g" /etc/zabbix_agentd.conf;
+sed --follow-symlinks -i '/# AllowRoot=0/a \ \nAllowRoot=0' /etc/zabbix_agentd.conf;
 
 # Copy init script
 cp /usr/src/${zbx_dir}/misc/init.d/fedora/core5/zabbix_agentd /etc/init.d/;
