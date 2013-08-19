@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Check for required packages
-if ! rpm -q --quiet gcc; then echo "Zabbix Agent installation requires GCC, please install first."; exit 1; fi
-if ! rpm -q --quiet make; then echo "Zabbix Agent installtion requires make, please install first."; exit 1; fi
-if ! rpm -q --quiet bind-utils; then echo "Zabbix Agent installation requires bind-utils, please install first."; exit 1; fi
-if ! rpm -q --quiet sed; then echo "Zabbix Agent installation requires sed, please install first"; exit 1; fi
+packages=( "gcc" "make" "bind-utils" "sed" "net-snmp" );
+for package in "${packages[@]}"; do
+    if ! rpm -q --quiet ${package}; then
+        echo "Zabbix Agent installation requires ${package}, please install first.";
+        exit 1;
+    fi
+done
 
 # Assign some variables... FOR SCIENCE!
 curdir=$(pwd);
